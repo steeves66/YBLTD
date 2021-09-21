@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Client;
 use App\Models\Article;
 use App\Models\StatutLocation;
@@ -24,7 +25,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionTableSeeder::class);
         $this->call(RoleTableSeeder::class);
         $this->call(DureeLocationTableSeeder::class);
-        Article::factory(100)->create();
-        Client::factory(100)->create();
+
+        Article::factory(10)->create();
+        Client::factory(10)->create();
+        User::factory(10)->create();
     }
 }

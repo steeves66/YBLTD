@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Article;
+use App\Models\TypeArticle;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return view('welcome');
+}); */
+
+Route::get('/articles', function () {
+    return Article::with("type")->paginate(5);
 });
+
+Route::get('/typesarticles', function () {
+    return TypeArticle::with("articles")->paginate(5);
+});
+
+Auth::routes();
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
