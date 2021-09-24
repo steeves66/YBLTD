@@ -3,7 +3,7 @@
         <!-- Add icons to the links using the .nav-icon class
  with font-awesome or any other icon font library -->
         <li class="nav-item">
-            <a href="{{ route('home') }}" class="nav-link">
+            <a href="{{ route('home') }}" class="nav-link {{ setMenuActive('home') }}">
                 <i class="nav-icon fas fa-home"></i>
                 <p>
                     Accueil
@@ -11,7 +11,7 @@
             </a>
         </li>
 
-        {{-- @can("manager") --}}
+        @can("manager")
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -28,18 +28,18 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="#" class="nav-link ">
                         <i class="nav-icon fas fa-swtchbook"></i>
                         <p>Locations</p>
                     </a>
                 </li>
             </ul>
         </li>
-        {{-- @endcan --}}
+        @endcan
 
-        {{-- @can("admin") --}}
-        <li class="nav-item">
-            <a href="#" class="nav-link ">
+        @can("admin")
+        <li class="nav-item {{ setMenuClass('admin.habilitations', 'menu-open') }}">
+            <a href="#" class="nav-link {{ setMenuClass('admin.habilitations','active')}}">
                 <i class="nav-icon fas fa-user-shield"></i>
                 <p>
                     Habilitations
@@ -47,10 +47,13 @@
                 </p>
             </a>
             <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item {{ setMenuClass('admin.habilitations','active')}}">
+                    <a href="{{ route('admin.habilitations.users.index') }}"
+                        class="nav-link {{ setMenuActive('admin.habilitations.users.index')}}">
                         <i class="nav-icon fas fa-users-cog"></i>
-                        <p>Utilisateurs</p>
+                        <p>
+                            Utilisateurs
+                        </p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -91,9 +94,9 @@
                 </li>
             </ul>
         </li>
-        {{-- @endcan --}}
+        @endcan
 
-        {{-- @can("employe") --}}
+        @can("employe")
         <li class="nav-header">LOCATION</li>
         <li class="nav-item">
             <a href="" class="nav-link ">
@@ -121,7 +124,7 @@
                 </p>
             </a>
         </li>
-        {{-- @endcan --}}
+        @endcan
 
     </ul>
 </nav>

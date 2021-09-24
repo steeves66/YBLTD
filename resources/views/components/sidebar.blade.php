@@ -10,10 +10,7 @@
                 <h3 class="text-center profile-username ellipsis">{{ userFullName() }}</h3>
 
                 <p class="text-center text-muted">
-                    @foreach (auth()->user()->roles as $role)
-                    {{ \Illuniate\Support\Str::ucfirst($role) }},
-                    @endforeach
-
+                    {{ getUserRolesName() }}
                 </p>
 
                 <ul class="mb-3 list-group bg-dark ">

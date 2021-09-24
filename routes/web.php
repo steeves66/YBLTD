@@ -4,6 +4,8 @@ use App\Models\Article;
 use App\Models\TypeArticle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Livewire\utilisateurs\UtilisateurComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +33,22 @@ Route::get('/typesarticles', function () {
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/* Route::get('/habilitations/utilisateurs', [App\Http\Controllers\UserController::class, 'index'])
+->middleware("auth.admin")
+->name('utilisateurs'); */
+
+Route::group(
+    [
+        "middleware" => ["auth", "auth.admin"],
+        "as" => "admin."
+    ],
+    function () {
+        Route::group([
+            "prefix" => "habilitations",
+            "as" => "habilitations."
+        ], function () {
+            Route::get("/utilisateurs", UtilisateurComponent::class)->name("users.index");
+        });
+    }
+);
