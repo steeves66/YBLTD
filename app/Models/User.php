@@ -20,7 +20,13 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'nom',
+        'prenoms',
+        'sexe',
+        'telephone1',
+        'telephone2',
+        'piece_identite',
+        'numero_piece_identite',
         'email',
         'password',
     ];
@@ -44,27 +50,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function paiements(){
+    public function paiements()
+    {
         return $this->hasMany(Paiement::class);
     }
 
-    public function locations(){
+    public function locations()
+    {
         return $this->hasMany(Location::class);
     }
 
-    public function roles(){
+    public function roles()
+    {
         return $this->BelongsToMany(Role::class, 'user_role', 'user_id', 'role_id');
     }
 
-    public function permissions(){
+    public function permissions()
+    {
         return $this->BelongsToMany(Permission::class, 'user_permission', 'user_id', 'permission_id');
     }
 
-    public function hasRole($role){
+    public function hasRole($role)
+    {
         return $this->roles()->where("nom", $role)->first() !== null;
     }
 
-    public function hasAnyRoles($roles){
+    public function hasAnyRoles($roles)
+    {
         return $this->roles()->whereIn("nom", $roles)->first() !== null;
     }
 }
