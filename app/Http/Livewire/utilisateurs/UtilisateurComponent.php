@@ -46,6 +46,26 @@ class UtilisateurComponent extends Component
         $this->dispatchBrowserEvent("showSuccessMessage", ["message" => "Utilisateur crée avec succès !"]);
     }
 
+    public function confirmDelete($name, $id)
+    {
+        $this->dispatchBrowserEvent("showConfirmMessage", [
+            'message' => [
+                "text" => "Vous êtes sur le point de supprimer $name de la liste des utilisateurs. Voulez-vous continuer?",
+                "title" => "Êtes-vous sûr de continuer",
+                "icon" => "warning",
+                "data" => [
+                    "user_id" => $id
+                ]
+            ]
+        ]);
+    }
+
+    public function deleteUser($id)
+    {
+        User::destroy($id);
+        $this->dispatchBrowserEvent("showDeleteSuccessMessage", ["message" => "Utilisateur supprimé avec succès !"]);
+    }
+
     public function render()
     {
         return view('livewire.utilisateurs.index', [
