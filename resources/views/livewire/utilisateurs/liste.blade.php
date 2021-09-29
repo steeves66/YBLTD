@@ -1,4 +1,4 @@
-<div class="row ml-3">
+<div class="ml-3 row">
     <div class="col-12">
         <div class="card">
             <div class="card-header bg-primary d-flex align-items-center">
@@ -48,7 +48,8 @@
                                     class="tag tag-success">{{ $user->created_at->diffForHumans()}}</span>
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-link"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-link" wire:click="goToEditUser({{ $user->id }})"><i
+                                        class="fas fa-edit"></i></button>
                                 <button class="btn btn-link"
                                     wire:click="confirmDelete('{{ $user->nom }} {{ $user->prenoms }}', {{ $user->id }})"><i
                                         class="far fa-trash-alt"></i></button>
@@ -68,33 +69,3 @@
         <!-- /.card -->
     </div>
 </div>
-
-<script>
-    window.addEventListener("showConfirmMessage", event =>{
-        Swal.fire({
-            title: event.detail.message.title,
-            text: event.detail.message.text,
-            icon: event.detail.message.icon,
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Continuer',
-            cancelButtonText: 'Annuler',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                @this.deleteUser(event.detail.message.data.user_id)
-            }
-        })
-
-        window.addEventListener("showDeleteSuccessMessage", event =>{
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                toast:true,
-                title: event.detail.message || "Opération effectuée avec succès !.",
-                showConfirmButton: false,
-                timer: 3000
-            })
-        })
-})
-</script>

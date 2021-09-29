@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Str;
 
+define('USERPAGECREATEFORM', 'create');
+define('USERPAGEEDITFORM', 'edit');
+define('USERPAGELIST', 'list');
+
+define('DEFAULTPASSWORD', 'password');
+
 function userFullName()
 {
     return auth()->user()->nom . ' ' . auth()->user()->prenoms;

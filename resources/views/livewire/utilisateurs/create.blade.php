@@ -1,4 +1,4 @@
-<div class="row ml-4">
+<div class="ml-4 row">
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header">
@@ -10,7 +10,7 @@
             <form role="form" wire:submit.prevent="addUser()">
                 <div class="card-body">
                     <div class="d-flex">
-                        <div class="form-group flex-grow-1 mr-2">
+                        <div class="mr-2 form-group flex-grow-1">
                             <label>Nom</label>
                             <input type="text" wire:model="newUser.nom" class="form-control @error('newUser.nom')
                                 is-invalid @enderror">
@@ -51,17 +51,21 @@
                     </div>
 
                     <div class="d-flex">
-                        <div wire:model="newUser.telephone1" class="form-group flex-grow-1 mr-2">
+                        <div wire:model="newUser.telephone1" class="mr-2 form-group flex-grow-1">
                             <label>Telephone 1</label>
                             <input type="text" class="form-control @error('newUser.telephone1')
-                            is-invalid @enderror">
+                            is-invalid @enderror" wire:model="newUser.telephone1">
                             @error("newUser.telephone1")
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group flex-grow-1">
                             <label>Telephone 2</label>
-                            <input type="text" class="form-control" wire:model="newUser.telephone2">
+                            <input type="text" class="form-control @error('newUser.telephone1')
+                            is-invalid @enderror" wire:model="newUser.telephone2">
+                            @error("newUser.telephone2")
+                            <span class="text-danger">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
 
@@ -104,16 +108,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    window.addEventListener("showSuccessMessage", event =>{
-        Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            toast:true,
-            title: event.detail.message || "Opération effectuée avec succès !.",
-            showConfirmButton: false,
-            timer: 3000
-        })
-    })
-</script>
